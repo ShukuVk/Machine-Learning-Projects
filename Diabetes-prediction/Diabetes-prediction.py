@@ -19,7 +19,7 @@ data = pd.read_csv("pima-indians-diabetes.csv")
 
 # Display first few rows
 print("Dataset Preview:")
-display(data.head())
+data.head()
 
 # ------------------------------------------------------------------------------
 # 2. Exploring the Dataset
