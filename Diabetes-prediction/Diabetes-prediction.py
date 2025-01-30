@@ -19,7 +19,7 @@ data = pd.read_csv("pima-indians-diabetes.csv")
 
 # Display first few rows
 print("Dataset Preview:")
-display(data.head())
+data.head()
 
 # ------------------------------------------------------------------------------
 # 2. Exploring the Dataset
@@ -148,5 +148,32 @@ print(classification_report(y_test, y_pred))
 - A KNN model was trained, and the best value of k was found to be {best_k} with {best_accuracy:.2f} accuracy.
 - Model evaluation showed that our classifier performs well, with decent precision and recall.
 """
+# ------------------------------------------------------------------------------
+# 8. Logistic Regression Model
+# ------------------------------------------------------------------------------
+from sklearn.linear_model import LogisticRegression
 
+# Train the logistic regression model
+log_reg = LogisticRegression(max_iter=1000, random_state=42)
+log_reg.fit(X_train, y_train)
+
+# Model evaluation
+y_pred_lr = log_reg.predict(X_test)
+
+# Model accuracy
+accuracy_lr = log_reg.score(X_test, y_test)
+print(f"\nLogistic Regression Accuracy: {accuracy_lr:.4f}")
+
+# Confusion matrix
+cm_lr = confusion_matrix(y_test, y_pred_lr)
+plt.figure(figsize=(6, 4))
+sns.heatmap(cm_lr, annot=True, fmt='d', cmap="Blues", xticklabels=["No Diabetes", "Diabetes"], yticklabels=["No Diabetes", "Diabetes"])
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.title("Confusion Matrix - Logistic Regression")
+plt.show()
+
+# Classification report
+print("\nLogistic Regression Classification Report:")
+print(classification_report(y_test, y_pred_lr))
 
